@@ -81,13 +81,26 @@
 
 // type conversion
 
-const inputYear = '1991';
-console.log(Number(inputYear));
+// const inputYear = '1991';
+// console.log(Number(inputYear));
 
-console.log(Number('Jonas'));
-console.log(String(23), 23);
+// console.log(Number('Jonas'));
+// console.log(String(23), 23);
 
-// type coercion 
+// // type coercion 
 
-console.log('I am ' + 23 + ' years old');
-console.log('23' - '10' - 3 )
+// console.log('I am ' + 23 + ' years old');
+// console.log('23' - '10' - 3 )
+
+// 5 falsy values: 0 , '', undefined, null , NaN
+// {} empty object is truly values
+// let height = 0 ; // height is defined but can't check because 0 is falsy value
+// if (height) {
+//     console.log('Good ! Height is defined');
+// }else {
+//     console.log('Height is UNDEFINED')
+// }
+
+const age = 18;
+if (age === 18) console.log('You just became an adult :D');
+if (age == '18') console.log('Type coercion');
