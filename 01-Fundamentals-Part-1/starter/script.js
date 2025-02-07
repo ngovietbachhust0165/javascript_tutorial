@@ -101,6 +101,55 @@
 //     console.log('Height is UNDEFINED')
 // }
 
-const age = 18;
-if (age === 18) console.log('You just became an adult :D');
-if (age == '18') console.log('Type coercion');
+// const age = 18;
+// if (age === 18) console.log('You just became an adult :D');
+// if (age == '18') console.log('Type coercion');
+
+// const favourite =  Number(prompt("What's your favourite number ?"));
+// console.log(favourite)
+// console.log(typeof favourite)
+
+// const hasDriversLicense = true; 
+// const hasGoodVision = true; 
+
+// console.log(hasDriversLicense && hasGoodVision);
+// console.log(hasDriversLicense || hasGoodVision);
+// console.log(!hasDriversLicense); // not operation
+
+// const scoreDolphins = (96+108+89)/3;
+// const scoreKoalas = (88+91+110)/3;
+// if (scoreDolphins > scoreKoalas) console.log(`Dolphins win the trophy`);
+// else if (scoreDolphins < scoreKoalas) console.log(`Koalas win the trophy`);
+// else console.log(`Both win the troph`);
+
+// const day = 'wedneday'
+// switch(day) {
+//     case 'monday': // day === 'monday'
+//         console.log('Plan course structure');
+//         console.log('Go to coding meetup');
+//         break;
+//     case 'tuesday':
+//         console.log('Prepare theory videos');
+//         break;
+//     case 'wednesday':
+//     case 'thursday': // wednesday and thursday same code 
+//         console.log('Write code example');
+//         break;
+//     case 'friday':
+//         console.log('Record video');
+//         break;
+//     default:
+//         console.log('Not a valid day!');
+// }
+ 
+// if is statement 
+// conditional operator: the ternary operator
+// const age = 23;
+// age >= 18 ? console.log('I like to drink wine') : console.log('I like to drink water'); // if is statement but this is expression so :
+// console.log(`${age >= 18 ? 'I like to drink wine' : 'I like to drink water'}`);
+const bill = 275;
+
+/* Write your code below. Good luck! 🙂 */
+
+const tip = 50 <= bill <= 300 ? bill * 15 / 100 : bill * 20 / 100;
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill+tip}`);
