@@ -143,18 +143,87 @@
 
 // Object: key values fair 
 
-const jonas = {
-    firstName: 'Jonas',
-    lastName: 'Schemedtmann',
-    age: 2037 - 1991,
-    job: 'teacher',
-    friends: ['Michael', 'Steven', 'Peter']
-};
-console.log(jonas);
 
-console.log(jonas.lastName);
-console.log(jonas['lastName']); // can pass expression to get string
+// console.log(jonas);
 
-const nameKey = 'Name';
-console.log(jonas['first' + nameKey]);
-console.log(jonas[])
+// console.log(jonas.lastName);
+// console.log(jonas['lastName']); // can pass expression to get string
+
+// const nameKey = 'Name';
+// console.log(jonas['first' + nameKey]);
+// console.log(jonas['last' + nameKey]);
+
+// const interestedIn =  prompt('What do you want to know about Jonas? Choose between firstName ...');
+// console.log(interestedIn);
+// console.log(jonas[interestedIn]);
+// if (jonas[interestedIn]) {
+//     console.log(jonas[interestedIn]);
+// }else {
+//     console.log('Wrong request !');
+// }
+// jonas.location = 'Portugal';
+// jonas['twitter'] = '@jonassh';
+// console.log(jonas);
+// console.log(`Jonas has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);
+
+// const jonas = {
+//     firstName: 'Jonas',
+//     lastName: 'Schemedtmann',
+//     brithYear: 1991,
+//     age: 2037 - 1991,
+//     job: 'teacher',
+//     friends: ['Michael', 'Steven', 'Peter'],
+//     hasDriversLicense: false,
+
+//     // calcAge: function(brithYear) {
+//     //     return 2037 - brithYear;
+//     // }
+//     // calcAge: function(){
+//     //     return 2037 - this.brithYear;
+//     // }
+//     calcAge: function(){
+//         this.age = 2037 - this.brithYear;
+//         return this.age;
+//     },
+//     getSummary: function(){
+//         return `${this.firstName} is a ${this.age}-year old ${this.job}, and he has ${this.hasDriversLicense?'a':'no'} driver's license`
+//     }
+// };
+
+// // console.log (this.calcAge(1991));
+// // console.log (jonas['calcAge'](1991));
+// // console.log (jonas.calcAge(jonas.brithYear));
+// console.log (jonas.calcAge());
+// console.log (jonas.age);
+// console.log (jonas.age);
+// console.log(`${jonas.firstName} is a ${jonas.age}-year old ${jonas.job}, and he has ${jonas.hasDriversLicense?'a':'no'} driver's license`);
+// console.log(jonas.getSummary());
+
+// for (let i = 0 ; i < 10 ; i++){
+//     console.log(`Lift weight ${i}`);
+// }
+// const jonas = ['Jonas', 'Schemedtmann', 2037 - 1991, 'teacher', ['Michael', 'Peter', 'Steven']];
+// for (let i = 0 ; i < jonas.length ; i++){
+//     if (typeof jonas[i] !== 'string') continue;
+
+//     console.log(jonas[i]);
+// }
+
+
+// While loop 
+
+// for (let i = 0 ; i < 10 ; i++){
+//     console.log(`Lift weight ${i}`);
+// }
+// let rep = 1
+// while (rep <= 10){
+//     console.log(`Lift weight ${rep}`);
+//     rep++;
+// }
+
+let dice = Math.floor(Math.random() * 6) + 1;
+console.log(dice);
+while (dice !== 6) {
+    console.log("go go");
+    dice = Math.floor(Math.random() * 6) + 1;
+}
