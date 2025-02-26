@@ -214,6 +214,17 @@ GOOD LUCK 😀
 // find method
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+//findLast and findLastIndex Methods
+const lastWithdrawl = movements.findLast(mov => mov < 0);
+// EQUALITY
+console.log(movements.includes(-130));
+// SOME: CONDITION
+const anyDeposit = movements.some(mov => mov > 0);
+console.log(anyDeposit);
+// EVERY
+
+console.log(movements.every(mov => mov > 0));
+
 // Data
 const account1 = {
   owner: 'Jonas Schmedtmann',
@@ -299,9 +310,11 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, cur) => acc + cur);
+const calcDisplayBalance = function (acc) {
+  const balance = acc.movements.reduce((bal, cur) => bal + cur);
+  acc.balance = balance;
   labelBalance.textContent = balance + '€';
+  return balance;
 };
 
 const calcDisplaySummary = function (movements, interestRate) {
@@ -321,6 +334,11 @@ const calcDisplaySummary = function (movements, interestRate) {
     .reduce((acc, mov) => acc + mov);
   labelSumInterest.textContent = interest + '€';
 };
+const updateUI = function (currentAccount) {
+  displayMovements(currentAccount.movements);
+  calcDisplayBalance(currentAccount);
+  calcDisplaySummary(currentAccount.movements, currentAccount.interestRate);
+};
 
 //Event handler
 let currentAccount;
@@ -332,7 +350,7 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and message
@@ -341,9 +359,7 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 1;
-    displayMovements(currentAccount.movements);
-    calcDisplayBalance(currentAccount.movements);
-    calcDisplaySummary(currentAccount.movements, currentAccount.interestRate);
+    updateUI(currentAccount);
     //Clear input field
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
@@ -352,6 +368,44 @@ btnLogin.addEventListener('click', function (e) {
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
-  const receiverAcc = accounts.find(acc => );
-  // console.log('transfer');
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
+btnLoan.addEventListener('click', function (e) {
+  e.defaultPrevented();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+    console.log(accounts);
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
 });
