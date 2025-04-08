@@ -302,11 +302,71 @@ const allActivities = breeds.map(acc => acc.activities).flat();
 console.log(allActivities);
 
 //4
-const uniqueActivities = new Set(allActivities);
+const uniqueActivities = [...new Set(allActivities)];
 console.log(uniqueActivities);
 
 //5
-const swimmingAdjacent = uniqueActivities.
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter(breed => breed.activities.includes('swimming'))
+      .flatMap(breed => breed.activities)
+      .filter(activity => activity !== 'swimming')
+  ),
+];
+console.log(swimmingAdjacent);
+//6
+const totalWeight = breeds
+  .map(acc => acc.averageWeight)
+  .reduce((total, cur) => (total += cur));
+console.log(totalWeight);
+
+//Sort
+const owner = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owner.sort());
+
+// Numbers
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// console.log(movements.sort()); // it not work , because default sort by string
+// return < 0 , A, B (keep order)
+// return > 0 , B ,A (switch order)
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+// Array Grouping
+const groupedMov = Object.groupBy(movements, movement =>
+  movement > 0 ? 'deposits' : 'withfrawals'
+);
+console.log(groupedMov);
+
+// Fill method
+const x = new Array(7);
+x.fill(1, 3, 5);
+console.log(x);
+
+// Array from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const movementUI = Array.from(document.querySelectorAll('.movements__value'));
+console.log(movementUI);
+// Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
+
+// const reversedMov = movements.reverse(); // mutated origin array
+// const reversedMov = movements.slice().reverse();
+const reversedMov = movements.toReversed();
+console.log(reversedMov);
+console.log(movements);
+
+// toSorted (sort), toSpliced (splice)
+
+// movements[1]= 2000;
+const newMovements = movements.with(1, 2000);
+console.log(newMovements);
 
 // Data
 const account1 = {
@@ -378,9 +438,10 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = ` 
     <div class="movements__row">
@@ -504,4 +565,11 @@ btnClose.addEventListener('click', function (e) {
     console.log(accounts);
   }
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
